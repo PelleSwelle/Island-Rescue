@@ -34,7 +34,7 @@ public class Bar : MonoBehaviour {
     void updateBar()
     {
         float WaterLevel = Water.position.y;
-        float BarLevel = mapRange(0f, 100f, -429f, 0, WaterLevel);
+        float BarLevel = mapRange(0f, 10f, -327f, 0, WaterLevel);
         bar.offsetMax = new Vector2(bar.offsetMax.x, BarLevel);
     }
 
