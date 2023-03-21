@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RisingScript : MonoBehaviour
 {
+    public float waterRisingRate = 0.02f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,7 @@ public class RisingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    this.transform.position = this.transform.position + new Vector3 (0f, 0.02f, 0f) * Time.deltaTime;
+    this.transform.position = this.transform.position + new Vector3 (0f, waterRisingRate, 0f) * Time.deltaTime;
     
     }
 }
