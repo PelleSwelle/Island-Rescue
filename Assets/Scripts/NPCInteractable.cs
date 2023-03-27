@@ -19,7 +19,7 @@ public class NPCInteractable : MonoBehaviour
 
     void Update()
     {
-        timeToScream = Random.Range(1, 50);
+        timeToScream = Random.Range(1, 5);
         playVoiceAtRandomTime();
     }
 
