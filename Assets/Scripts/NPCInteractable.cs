@@ -50,7 +50,6 @@ public class NPCInteractable : MonoBehaviour
         }
         if (isDead)
             meshRenderer.material = deadMat;
-
     }
 
     void playVoiceAtRandomTime()
