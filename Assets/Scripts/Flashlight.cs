@@ -1,42 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
-
 
 public class Flashlight : MonoBehaviour
 {
-    Light m_Light;
-    public bool drainOverTime;
-    public float maxBrightness;
-    public float minBrightness;
-    public float drainRate;
+    Light m_light;
+    public bool drainsOverTime;
+    public float maxBrightness, minBrightness, drainRate;
 
-
-    // Start is called before the first frame update
     void Start()
-    {
-        m_Light = GetComponent<Light>();
-        
-        
-    }
+        => m_light = GetComponent<Light>();
 
-    // Update is called once per frame
     void Update()
     {
-         m_Light.intensity = Mathf.Clamp(m_Light.intensity,minBrightness,maxBrightness);
-        if(drainOverTime == true && m_Light.enabled == true)
-        {
-            if (m_Light.intensity > minBrightness)
-            {
-                m_Light.intensity -= Time.deltaTime *(drainRate/1000);
-            }
-        }
+        m_light.intensity = Mathf.Clamp(m_light.intensity ,minBrightness, maxBrightness);
+
+        if (drainsOverTime && m_light.enabled == true)
+            if (m_light.intensity > minBrightness)
+                m_light.intensity -= Time.deltaTime *(drainRate/1000);
 
         if (Input.GetKeyDown(KeyCode.F))
-        {
-            m_Light.enabled = !m_Light.enabled;
-        }
-        
+            m_light.enabled = !m_light.enabled;
     }
 }

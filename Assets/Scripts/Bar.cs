@@ -1,36 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DentedPixel;
 
-public class Bar : MonoBehaviour {
-    
+public class Bar : MonoBehaviour 
+{    
     public RectTransform bar;
-    public int time;
     public Transform Water;
 
-
-
-      
-    void Start () {
-        AnimateBar();
-           }
-
-
-       void Update () {
-        updateBar();
-        }
-
-    public void AnimateBar()
-            {
-               
-       }
-
-    public static float mapRange(float inStart, float inEnd, float outStart, float outEnd, float value)
+    void Update () 
     {
-        float scale = (outEnd - outStart) / (inEnd - inStart);
-        return (outStart + ((value - inStart) * scale));
+        updateBar();
     }
+
     void updateBar()
     {
         float WaterLevel = Water.position.y;
@@ -38,4 +17,9 @@ public class Bar : MonoBehaviour {
         bar.offsetMax = new Vector2(bar.offsetMax.x, BarLevel);
     }
 
+    public static float mapRange(float inStart, float inEnd, float outStart, float outEnd, float value)
+    {
+        float scale = (outEnd - outStart) / (inEnd - inStart);
+        return (outStart + ((value - inStart) * scale));
+    }
 }
