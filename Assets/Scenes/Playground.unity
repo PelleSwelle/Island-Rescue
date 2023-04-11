@@ -1127,6 +1127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5817706880294359723, guid: 28932f984b07f6645bd02b6d3a0ac14c,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6782453036794357730, guid: 28932f984b07f6645bd02b6d3a0ac14c,
         type: 3}
       propertyPath: m_Name
@@ -38400,6 +38405,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5817706880294359723, guid: 28932f984b07f6645bd02b6d3a0ac14c,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6782453036794357730, guid: 28932f984b07f6645bd02b6d3a0ac14c,
         type: 3}
       propertyPath: m_Name
@@ -39533,6 +39543,7 @@ GameObject:
   - component: {fileID: 1046196897}
   - component: {fileID: 1046196896}
   - component: {fileID: 1046196895}
+  - component: {fileID: 1046196901}
   m_Layer: 0
   m_Name: ' RainParticle'
   m_TagString: Untagged
