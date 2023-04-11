@@ -39,7 +39,7 @@ public class NPCInteractable : MonoBehaviour
     {
         isDead = stamina.isEmpty;
         isUnderWater = transform.position.y < water.position.y;
-        timeToScream = Random.Range(1, 50);
+        timeToScream = Random.Range(1, 70);
 
         if (!isDead && !isRescued)
         {

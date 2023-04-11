@@ -20,7 +20,7 @@ public class Flash : MonoBehaviour
 
     void Update()
     {
-        timeToThunder = Random.Range(0, 50);
+        timeToThunder = Random.Range(0, 70);
         if (timeToThunder == 5) 
         { 
             playThunder(); 
@@ -33,7 +33,7 @@ public class Flash : MonoBehaviour
         Debug.Log("lighning START at: " + Time.time);
         lightning.enabled = true;
         //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.5f);
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("lightning END at: " + Time.time);
