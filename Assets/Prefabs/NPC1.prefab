@@ -115,7 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 5817706880294359723}
   shouts:
-  - {fileID: 8300000, guid: 8934e45ec8ac7dc46a9f8b64a7ebed70, type: 3}
+  - {fileID: 8300000, guid: c81e83e58cffc4b919e5b750ff38cab9, type: 3}
+  - {fileID: 8300000, guid: 18ade40fe73c64627bf8b2137d9f4004, type: 3}
+  - {fileID: 8300000, guid: ff449d55f2a644059b14301b57ee467f, type: 3}
+  - {fileID: 8300000, guid: f500f9a6448964feba6a06683643c9de, type: 3}
   aliveMat: {fileID: 2100000, guid: 97b4b4b4b04212c4f889b0b4443490ca, type: 2}
   deadMat: {fileID: 2100000, guid: 3b11d682d4fb39842a1997e0e003fd18, type: 2}
   water: {fileID: 0}

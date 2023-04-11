@@ -4,51 +4,47 @@ using UnityEngine;
 
 public class Flash : MonoBehaviour
 {
-    Light testLight;
-    public float minWaitTime;
-    public float maxWaitTime;
-    public float turnOffInterval;
+    public Light lightning;
 
+    public int timeToThunder;
     public AudioSource source1;
     public List<AudioClip> thunderSounds;
 
-    float timeToThunder;
-    bool lightYes = true;
+    void Awake()
+        => lightning = GetComponent<Light>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        testLight = GetComponent<Light>();
-        StartCoroutine(Flashing());
+        lightning.enabled = false;
     }
 
-    IEnumerator Flashing()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-            testLight.enabled = !testLight.enabled;
-            yield return new WaitForSeconds(turnOffInterval);
-            testLight.enabled = false;
-            lightYes = false;
-            playThunderAtRandomTime();
-
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
-        
-
+        timeToThunder = Random.Range(0, 50);
+        if (timeToThunder == 5) 
+        { 
+            playThunder(); 
+            StartCoroutine(playLightning());
+        }
     }
-
-
-    void playThunderAtRandomTime()
+    IEnumerator playLightning()
     {
-        if (!source1.isPlaying) // check if playing already
-            if (lightYes == true) // random value TODO: change this
-                source1.PlayOneShot(thunderSounds[Random.Range(0, thunderSounds.Count)]);
+        //Print the time of when the function is first called.
+        Debug.Log("lighning START at: " + Time.time);
+        lightning.enabled = true;
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(2);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("lightning END at: " + Time.time);
+        lightning.enabled = false;
     }
+    void playThunder()
+    {
+        if (!source1.isPlaying)
+            source1.PlayOneShot(thunderSounds[Random.Range(0, thunderSounds.Count)]);
+    }
+        
+        
+
 }

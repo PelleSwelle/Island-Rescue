@@ -17,7 +17,5 @@ public class ScoreScript : MonoBehaviour
     {
         if (currentScore < requiredToWin)
             scoreText.text = "Score: " + currentScore.ToString();
-        else 
-            scoreText.text = "You have saved " + requiredToWin.ToString() + ". Time to get out!";
     }
 }
