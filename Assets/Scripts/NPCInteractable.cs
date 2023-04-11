@@ -32,7 +32,7 @@ public class NPCInteractable : MonoBehaviour
     {
         isRescued = true;
         Destroy(gameObject);
-        ScoreScript.score++;
+        ScoreScript.currentScore++;
     }
 
     void Update()
