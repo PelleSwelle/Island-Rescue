@@ -6,9 +6,7 @@ public class Bar : MonoBehaviour
     public Transform Water;
 
     void Update () 
-    {
-        updateBar();
-    }
+        => updateBar();
 
     void updateBar()
     {
