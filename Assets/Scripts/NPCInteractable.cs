@@ -28,7 +28,7 @@ public class NPCInteractable : MonoBehaviour
         isRescued = false;
     }
     
-    public void Interact()
+    public void rescue()
     {
         isRescued = true;
         Destroy(gameObject);

@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        enableControls();
+        
         isInWater = waterTransform.position.y > transform.position.y + overWaterThreshold;
         hasDrowned = stamina.currentStamina <= 0;
         
@@ -32,5 +34,17 @@ public class Player : MonoBehaviour
         }
         else 
             deadScreen.SetActive(true);
+    }
+
+    void enableControls()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            float interactRange = 2f;
+            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+            foreach (Collider collider in colliderArray) 
+                if (collider.TryGetComponent(out NPCInteractable npcInteractable)) 
+                    npcInteractable.rescue();
+        }
     }
 }
