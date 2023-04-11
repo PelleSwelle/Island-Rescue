@@ -9,6 +9,12 @@ public class Flash : MonoBehaviour
     public float maxWaitTime;
     public float turnOffInterval;
 
+    public AudioSource source1;
+    public List<AudioClip> thunderSounds;
+
+    float timeToThunder;
+    bool lightYes = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +30,25 @@ public class Flash : MonoBehaviour
             testLight.enabled = !testLight.enabled;
             yield return new WaitForSeconds(turnOffInterval);
             testLight.enabled = false;
+            lightYes = false;
+            playThunderAtRandomTime();
+
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        
 
+    }
+
+
+    void playThunderAtRandomTime()
+    {
+        if (!source1.isPlaying) // check if playing already
+            if (lightYes == true) // random value TODO: change this
+                source1.PlayOneShot(thunderSounds[Random.Range(0, thunderSounds.Count)]);
     }
 }
