@@ -17,6 +17,8 @@ public class NPCInteractable : MonoBehaviour
 
     bool isUnderWater = false;
 
+    void Awake() => water = FindObjectOfType<RisingScript>().GetComponent<Transform>();
+
     public void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -48,7 +50,6 @@ public class NPCInteractable : MonoBehaviour
         }
         if (isDead)
             meshRenderer.material = deadMat;
-
     }
 
     void playVoiceAtRandomTime()
