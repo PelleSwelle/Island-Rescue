@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Stamina stamina;
     public GameObject deadScreen;
     public GameObject winScreen;
+    public GameObject introScreen;
     public Transform waterTransform;
 
 
@@ -20,13 +21,10 @@ public class Player : MonoBehaviour
         hasDrowned = false;
         deadScreen.SetActive(false);
         winScreen.SetActive(false);
-
-
     }
 
     void Update()
     {
-
         hasWon = ScoreScript.currentScore >= ScoreScript.requiredToWin;
 
         isInWater = waterTransform.position.y > transform.position.y + overWaterThreshold;
@@ -57,6 +55,11 @@ public class Player : MonoBehaviour
             foreach (Collider collider in colliderArray) 
                 if (collider.TryGetComponent(out NPCInteractable npcInteractable)) 
                     rescue(npcInteractable);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            introScreen.SetActive(false);
         }
     }
 }
