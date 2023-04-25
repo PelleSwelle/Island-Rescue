@@ -61,8 +61,23 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
-		// cinemachine
-		private float _cinemachineTargetPitch;
+		[Header("Footstep Parameters")]
+		[SerializeField] private bool useFootsteps = true;
+		[SerializeField] private float baseStepSpeed = 0.5f;
+		[SerializeField] private float sprintStepmultiplier = 0.6f;
+		[SerializeField] private AudioSource footstepAudioSource = default;
+		[SerializeField] private AudioClip[] gravelClips = default;
+        [SerializeField] private AudioClip[] woodClips = default;
+		[SerializeField] private AudioClip[] waterClips = default;
+
+        private float footstepTimer = 0;
+		bool isSprinting = false;
+		private float GetCurrentOffset => isSprinting ? baseStepSpeed * sprintStepmultiplier : baseStepSpeed;
+
+
+
+        // cinemachine
+        private float _cinemachineTargetPitch;
 
 		// player
 		private float _speed;
@@ -125,6 +140,12 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			CheckifSprinting();
+
+			if(useFootsteps)
+			{
+				HandleFootsteps();
+			}
 		}
 
 		private void LateUpdate()
@@ -273,6 +294,48 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		void CheckifSprinting ()
+		{
+			if(Input.GetKeyDown(KeyCode.LeftShift)) {
+				isSprinting = true;
+				Debug.Log("Sprinting");
+			}
+		}
+
+		private void HandleFootsteps()
+		{
+			if (!Grounded) return;
+			if (_input.move == Vector2.zero) return;
+
+			footstepTimer -= Time.deltaTime;
+
+			if(footstepTimer <= 0)
+			{
+				if (Physics.Raycast(_mainCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+				{
+
+					switch(hit.collider.tag)
+					{
+						case "Footsteps/WATER":
+							footstepAudioSource.PlayOneShot(waterClips[Random.Range(0, waterClips.Length - 1)]);
+							break;
+						case "Footsteps/WOOD":
+                            footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+                            break;
+						default:
+                            footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, gravelClips.Length - 1)]);
+                            break;
+
+					}
+
+
+				}
+
+				footstepTimer = GetCurrentOffset;
+			}
+
 		}
 	}
 }
