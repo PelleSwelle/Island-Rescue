@@ -40,9 +40,9 @@ public class Player : MonoBehaviour
             deadScreen.SetActive(true);
         else if (hasWon)
             winScreen.SetActive(true);
-
     }
 
+    void rescue(NPCInteractable npc) => npc.hasBeenRescued = true;
     void enableInteraction()
     {
         if(Input.GetKeyDown(KeyCode.E))
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray) 
                 if (collider.TryGetComponent(out NPCInteractable npcInteractable)) 
-                    npcInteractable.rescue();
+                    rescue(npcInteractable);
         }
     }
 }
