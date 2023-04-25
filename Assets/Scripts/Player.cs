@@ -45,7 +45,10 @@ public class Player : MonoBehaviour
             winScreen.SetActive(true);
     }
 
-    void rescue(NPCInteractable npc) => npc.hasBeenRescued = true;
+    void rescue(VillagerBehavior villager) {
+        Debug.Log("rescuing " + villager.name);
+        villager.hasBeenRescued = true;
+    }
     void enableInteraction()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -53,8 +56,8 @@ public class Player : MonoBehaviour
             float interactRange = 2f;
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray) 
-                if (collider.TryGetComponent(out NPCInteractable npcInteractable)) 
-                    rescue(npcInteractable);
+                if (collider.TryGetComponent(out VillagerBehavior villager)) 
+                    rescue(villager);
         }
 
         if (Input.GetKeyDown(KeyCode.E))

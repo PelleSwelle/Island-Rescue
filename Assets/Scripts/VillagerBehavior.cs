@@ -1,13 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VillagerBehavior : MonoBehaviour
 {
     public AudioSource source;
     public List<AudioClip> shouts;
+    public NavMeshAgent agent;
 
-    public Transform water;
+    public Transform water, extractionPoint;
     public Stamina stamina;
     public bool isDead, hasBeenRescued = true;
     
@@ -17,9 +18,11 @@ public class VillagerBehavior : MonoBehaviour
 
     void Awake() 
     {
-        water = FindObjectOfType<RisingScript>().GetComponent<Transform>();
+        water = GameObject.Find("SeaVisual").transform;
         source = GetComponent<AudioSource>();
         stamina = GetComponent<Stamina>();
+        agent = GetComponent<NavMeshAgent>();
+        extractionPoint = GameObject.Find("ExtractionPoint").transform;
     }
 
     public void Start()
@@ -31,7 +34,12 @@ public class VillagerBehavior : MonoBehaviour
     
     void runForExtraction()
     {
-        // do pathfinding shit
+        Debug.Log("running for extraction");
+        agent.destination = extractionPoint.position;
+        float dist = agent.remainingDistance; 
+        
+        if (dist <= 2)
+            GameObject.Destroy(this);
     }
 
     void Update()
