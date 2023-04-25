@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -8,25 +9,29 @@ public class Player : MonoBehaviour
     public GameObject winScreen;
     public Transform waterTransform;
 
+
     bool hasDrowned;
-    
+
     public float overWaterThreshold;
     bool isInWater;
 
-    void Start() 
+    void Start()
     {
         hasDrowned = false;
         deadScreen.SetActive(false);
-        winScreen.SetActive(false); 
+        winScreen.SetActive(false);
+
+
     }
-    
+
     void Update()
     {
+
         hasWon = ScoreScript.currentScore >= ScoreScript.requiredToWin;
 
         isInWater = waterTransform.position.y > transform.position.y + overWaterThreshold;
         hasDrowned = stamina.currentStamina <= 0;
-        
+
         if (!hasDrowned && !hasWon)
         {
             enableInteraction();
@@ -45,7 +50,7 @@ public class Player : MonoBehaviour
     void rescue(NPCInteractable npc) => npc.hasBeenRescued = true;
     void enableInteraction()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             float interactRange = 2f;
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
