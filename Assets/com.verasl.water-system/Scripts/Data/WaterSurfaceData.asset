@@ -122,13 +122,13 @@ MonoBehaviour:
     direction: -176
     wavelength: 8
   _foamSettings:
-    foamType: 1
+    foamType: 0
     basicFoam:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 0.1437378
         inSlope: 0.16228558
         outSlope: 0.16228558
         tangentMode: 0
