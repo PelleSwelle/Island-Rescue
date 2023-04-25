@@ -17,7 +17,7 @@ public class VillagerBehavior : MonoBehaviour
 
     void Awake() 
     {
-        water = FindObjectOfType<RisingScript>().GetComponent<Transform>();
+        water = GameObject.Find("SeaVisual").GetComponent<Transform>();
         source = GetComponent<AudioSource>();
         stamina = GetComponent<Stamina>();
     }
