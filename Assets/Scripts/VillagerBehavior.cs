@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class VillagerBehavior : MonoBehaviour
 {
+    [SerializeField] Transform extractionPoint;
     public AudioSource source;
     public List<AudioClip> shouts;
+    NavMeshAgent agent;
 
     public Transform water;
     public Stamina stamina;
@@ -20,6 +23,8 @@ public class VillagerBehavior : MonoBehaviour
         water = GameObject.Find("SeaVisual").GetComponent<Transform>();
         source = GetComponent<AudioSource>();
         stamina = GetComponent<Stamina>();
+        agent = GetComponent<NavMeshAgent>();
+        extractionPoint = GameObject.FindGameObjectWithTag("extractionPoint").transform;
     }
 
     public void Start()
@@ -29,10 +34,7 @@ public class VillagerBehavior : MonoBehaviour
         hasBeenRescued = false;
     }
     
-    void runForExtraction()
-    {
-        // do pathfinding shit
-    }
+    public void runForExtraction() => agent.destination = extractionPoint.position;
 
     void Update()
     {
@@ -45,19 +47,20 @@ public class VillagerBehavior : MonoBehaviour
 
         if (!isDead && !hasBeenRescued)
         {
-            if (isUnderWater)
-                stamina.decrease();
+            if (isUnderWater) { stamina.decrease(); }
             
             playVoiceAtRandomTime();
         }
         if (isDead)
-            transform.rotation = new Quaternion(0, 0, 90, 0);
+            lieDown();
     }
+
+    void lieDown() => transform.rotation = new Quaternion(0, 0, 90, 0);
 
     void playVoiceAtRandomTime()
     {
         if (!source.isPlaying) // check if playing already
             if ((int)timeToScream == 3) // random value TODO: change this
-                source.PlayOneShot(shouts[Random.Range(0, shouts.Count)]);
+                source.PlayOneShot(shouts[Random.Range(0, shouts.Count-1)]);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
     bool hasWon = false;
     public Stamina stamina;
     public GameObject deadScreen;
@@ -14,7 +15,9 @@ public class Player : MonoBehaviour
     bool hasDrowned;
 
     public float overWaterThreshold;
-    bool isInWater;
+    public bool isInWater;
+
+    void Awake() => Instance = this;
 
     void Start()
     {
@@ -45,16 +48,23 @@ public class Player : MonoBehaviour
             winScreen.SetActive(true);
     }
 
-    void rescue(NPCInteractable npc) => npc.hasBeenRescued = true;
+    void rescue(VillagerBehavior villager) 
+    {
+        villager.hasBeenRescued = true;
+        villager.runForExtraction();
+    } 
     void enableInteraction()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            float interactRange = 2f;
+            float interactRange = 50f;
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray) 
-                if (collider.TryGetComponent(out NPCInteractable npcInteractable)) 
-                    rescue(npcInteractable);
+                if (collider.TryGetComponent(out VillagerBehavior villager)) 
+                {
+                    rescue(villager);
+                    Debug.Log("rescued: " + villager.name);
+                }
         }
 
         if (Input.GetKeyDown(KeyCode.E))

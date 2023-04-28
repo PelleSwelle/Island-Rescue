@@ -427,6 +427,8 @@ GameObject:
   - component: {fileID: 5542362796568780210}
   - component: {fileID: 1203570311360139437}
   - component: {fileID: 7273483598745612446}
+  - component: {fileID: 2835433911455101250}
+  - component: {fileID: 8968588877190404743}
   m_Layer: 0
   m_Name: adultFemale
   m_TagString: Untagged
@@ -467,6 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e4a686aef245a4f80bb8498073a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extractionPoint: {fileID: 0}
   source: {fileID: 0}
   shouts:
   - {fileID: 8300000, guid: c81e83e58cffc4b919e5b750ff38cab9, type: 3}
@@ -590,6 +593,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &2835433911455101250
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169529635929338161}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &8968588877190404743
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169529635929338161}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.490739
+  m_Height: 17.190845
+  m_Direction: 1
+  m_Center: {x: 0, y: 8.095421, z: 0}
 --- !u!1 &9171045951100435327
 GameObject:
   m_ObjectHideFlags: 0
