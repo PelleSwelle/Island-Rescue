@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public GameObject deadScreen;
     public GameObject winScreen;
     public GameObject introScreen;
+
+    public int villagersSaved = 0;
     
     float interactRange = 5f;
 
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        hasWon = ScoreScript.currentScore >= ScoreScript.requiredToWin;
+        hasWon = villagersSaved >= ScoreScript.requiredToWin;
 
         isInWater = WaterBehavior.Instance.currentLevel > transform.position.y + overWaterThreshold;
 
@@ -48,18 +50,27 @@ public class Player : MonoBehaviour
         else if (hasWon)        winScreen.SetActive(true);
     }
 
-    void rescue(VillagerBehavior villager) { villager.onBeingRescued(); } 
+    void rescue(VillagerBehavior villager) 
+    {
+        villagersSaved++;
+        villager.sayThankYou();
+        Destroy(villager.gameObject); 
+    } 
     void enableInputs()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray) 
+            {
                 if (collider.TryGetComponent(out VillagerBehavior villager)) 
                 {
                     rescue(villager);
                     Debug.Log("rescued: " + villager.name);
                 }
+                else if (collider.tag == "helicopter")
+                    endGame();
+            }
         }
 
         if (introScreen.activeInHierarchy)
@@ -69,5 +80,10 @@ public class Player : MonoBehaviour
                 introScreen.SetActive(false);
             }
         }
+    }
+
+    void endGame()
+    {
+        winScreen.SetActive(true);
     }
 }

@@ -10,8 +10,7 @@ public class Flash : MonoBehaviour
     public AudioSource source1;
     public List<AudioClip> thunderSounds;
 
-    void Awake()
-        => lightning = GetComponent<Light>();
+    void Awake() => lightning = GetComponent<Light>();
 
     void Start()
     {
@@ -29,14 +28,9 @@ public class Flash : MonoBehaviour
     }
     IEnumerator playLightning()
     {
-        //Print the time of when the function is first called.
-        Debug.Log("lighning START at: " + Time.time);
         lightning.enabled = true;
-        //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(.5f);
 
-        //After we have waited 5 seconds print the time again.
-        Debug.Log("lightning END at: " + Time.time);
         lightning.enabled = false;
     }
     void playThunder()

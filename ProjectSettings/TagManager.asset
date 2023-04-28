@@ -10,6 +10,11 @@ TagManager:
   - Footsteps/GRAVEL
   - Footsteps/WATER
   - Footsteps/WOOD
+  - villager/1
+  - villager/2
+  - villager/3
+  - villager/4
+  - helicopter
   layers:
   - Default
   - TransparentFX

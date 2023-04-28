@@ -68,9 +68,12 @@ public class VillagerBehavior : MonoBehaviour
     public void runForExtraction() 
     {
         if (extractionPoint == null) { throw new System.Exception("extractionPoint not set"); }
-        Debug.Log("running for extraction");
-        animator.Play("Injured Run");
-        agent.destination = extractionPoint.position;
+        sayThankYou();
+        
+        // agent.destination = extractionPoint.position;
+        // if (this.tag == "villager/1" || this.tag == "villager/4")   animator.Play("Injured Run");
+        // else if (this.tag == "villager/2")                          animator.Play("Injured Walking");
+        // else if (this.tag == "villager/3")                          animator.Play("Injured Jog");
     }
 
     
