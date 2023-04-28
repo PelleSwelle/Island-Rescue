@@ -6,7 +6,7 @@ using System;
 
 public class Logger : MonoBehaviour
 {
-    [SerializeField] TMP_Text isInWaterValue, drownedVillagersValue, savedVillagersValue, timeLeftValue;
+    [SerializeField] TMP_Text isInWaterValue, waterLevelValue, drownedVillagersValue, savedVillagersValue, timeLeftValue;
     [SerializeField] GameObject villagersParent;
 
    
@@ -15,7 +15,18 @@ public class Logger : MonoBehaviour
         isInWaterValue.text = Player.Instance.isInWater.ToString();
         // drownedVillagersValue.text = getNumberOfDrowned().ToString() + " / " + villagersParent.transform.childCount;
         // savedVillagersValue.text = getNumberOfSaved().ToString() + " / " + villagersParent.transform.childCount;
+
+        if (Input.GetKeyDown(KeyCode.P)) { killAllSoundEmitters(); }
     }
+
+    void killAllSoundEmitters()
+    {
+        foreach (AudioSource source in FindObjectsOfType<AudioSource>())
+        {
+            source.enabled = false;
+        }
+    }
+
 
     // int getNumberOfSaved()
     // {

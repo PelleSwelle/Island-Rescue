@@ -222,22 +222,16 @@ namespace StarterAssets
 
 				// stop our velocity dropping infinitely when grounded
 				if (_verticalVelocity < 0.0f)
-				{
 					_verticalVelocity = -2f;
-				}
 
 				// Jump
 				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-				}
 
 				// jump timeout
 				if (_jumpTimeoutDelta >= 0.0f)
-				{
 					_jumpTimeoutDelta -= Time.deltaTime;
-				}
 			}
 			else
 			{
@@ -246,9 +240,7 @@ namespace StarterAssets
 
 				// fall timeout
 				if (_fallTimeoutDelta >= 0.0f)
-				{
 					_fallTimeoutDelta -= Time.deltaTime;
-				}
 
 				// if we are not grounded, do not jump
 				_input.jump = false;
@@ -256,15 +248,14 @@ namespace StarterAssets
 
 			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
 			if (_verticalVelocity < _terminalVelocity)
-			{
 				_verticalVelocity += Gravity * Time.deltaTime;
-			}
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{
-			if (lfAngle < -360f) lfAngle += 360f;
-			if (lfAngle > 360f) lfAngle -= 360f;
+			if (lfAngle < -360f) 	lfAngle += 360f;
+			if (lfAngle > 360f) 	lfAngle -= 360f;
+
 			return Mathf.Clamp(lfAngle, lfMin, lfMax);
 		}
 
@@ -281,11 +272,9 @@ namespace StarterAssets
 		}
 
 		void CheckifSprinting ()
-		{
-			if(Input.GetKeyDown(KeyCode.LeftShift)) {
+		{ 
+			if (Input.GetKeyDown(KeyCode.LeftShift)) 
 				isSprinting = true;
-				Debug.Log("Sprinting");
-			}
 		}
 
 		private void HandleFootsteps()
@@ -299,7 +288,6 @@ namespace StarterAssets
 			{
 				if (Physics.Raycast(_mainCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
 				{
-
 					switch(hit.collider.tag)
 					{
 						case "Footsteps/WATER":
@@ -311,15 +299,10 @@ namespace StarterAssets
 						default:
                             footstepAudioSource.PlayOneShot(woodClips[Random.Range(0, gravelClips.Length - 1)]);
                             break;
-
 					}
-
-
 				}
-
 				footstepTimer = GetCurrentOffset;
 			}
-
 		}
 	}
 }

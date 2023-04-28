@@ -6,6 +6,10 @@ TagManager:
   tags:
   - CinemachineTarget
   - extractionPoint
+  - Ladder
+  - Footsteps/GRAVEL
+  - Footsteps/WATER
+  - Footsteps/WOOD
   layers:
   - Default
   - TransparentFX

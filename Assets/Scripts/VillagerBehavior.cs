@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class VillagerBehavior : MonoBehaviour
 {
+    Animator animator;
     [SerializeField] Transform extractionPoint;
     public AudioSource source;
     public List<AudioClip> shouts;
-    NavMeshAgent agent;
+    [SerializeField] NavMeshAgent agent;
 
     public Transform water;
     public Stamina stamina;
@@ -25,6 +26,15 @@ public class VillagerBehavior : MonoBehaviour
         stamina = GetComponent<Stamina>();
         agent = GetComponent<NavMeshAgent>();
         extractionPoint = GameObject.FindGameObjectWithTag("extractionPoint").transform;
+
+        if (GetComponent<Animator>() == null)
+        {
+            animator = gameObject.AddComponent<Animator>();
+            Debug.Log("added animator");
+        }
+        else 
+            animator = GetComponent<Animator>();
+        
     }
 
     public void Start()
@@ -32,35 +42,58 @@ public class VillagerBehavior : MonoBehaviour
         stamina.currentStamina = stamina.maxStamina;
         isDead = false;
         hasBeenRescued = false;
+        animator.Play("Injured Idle");
     }
-    
-    public void runForExtraction() => agent.destination = extractionPoint.position;
 
     void Update()
     {
         isDead = stamina.isEmpty;
         isUnderWater = transform.position.y < water.position.y;
-        timeToScream = Random.Range(1, 70);
-
-        if (hasBeenRescued) 
-            runForExtraction();
+        timeToScream = Random.Range(1, 300);
 
         if (!isDead && !hasBeenRescued)
         {
             if (isUnderWater) { stamina.decrease(); }
-            
             playVoiceAtRandomTime();
         }
         if (isDead)
-            lieDown();
+            animator.Play("Falling");
     }
 
+    public void sayThankYou()
+    {
+        animator.Play("Thankful");
+    }
+    
+    public void runForExtraction() 
+    {
+        if (extractionPoint == null) { throw new System.Exception("extractionPoint not set"); }
+        Debug.Log("running for extraction");
+        animator.Play("Injured Run");
+        agent.destination = extractionPoint.position;
+    }
+
+    
+
     void lieDown() => transform.rotation = new Quaternion(0, 0, 90, 0);
+
+    public void onBeingRescued() 
+    { 
+        sayThankYou();
+        hasBeenRescued = true; 
+        runForExtraction(); 
+    }
 
     void playVoiceAtRandomTime()
     {
         if (!source.isPlaying) // check if playing already
             if ((int)timeToScream == 3) // random value TODO: change this
-                source.PlayOneShot(shouts[Random.Range(0, shouts.Count-1)]);
+                source.PlayOneShot(getRandomShout());    
+    }
+
+    AudioClip getRandomShout()
+    {
+        int random = (int) Random.Range(1, shouts.Count -1);
+        return shouts[random];
     }
 }

@@ -18,12 +18,5 @@ public class IntroPanelScript : MonoBehaviour
     public void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Destroy(IntroBox);
-
-        }
-
-
     }
 }

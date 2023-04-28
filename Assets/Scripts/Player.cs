@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     public GameObject deadScreen;
     public GameObject winScreen;
     public GameObject introScreen;
-    public Transform waterTransform;
+    
+    float interactRange = 5f;
 
 
     bool hasDrowned;
@@ -30,34 +31,28 @@ public class Player : MonoBehaviour
     {
         hasWon = ScoreScript.currentScore >= ScoreScript.requiredToWin;
 
-        isInWater = waterTransform.position.y > transform.position.y + overWaterThreshold;
+        isInWater = WaterBehavior.Instance.currentLevel > transform.position.y + overWaterThreshold;
+
+        if (isInWater)
+            transform.position = new Vector3(transform.position.x, WaterBehavior.Instance.currentLevel, transform.position.z);
         hasDrowned = stamina.currentStamina <= 0;
 
         if (!hasDrowned && !hasWon)
         {
-            enableInteraction();
+            enableInputs();
 
-            if (isInWater)
-                stamina.decrease();
-            else
-                stamina.increase();
+            if (isInWater)      stamina.decrease();
+            else                stamina.increase();
         }
-        else if (hasDrowned)
-            deadScreen.SetActive(true);
-        else if (hasWon)
-            winScreen.SetActive(true);
+        else if (hasDrowned)    deadScreen.SetActive(true);
+        else if (hasWon)        winScreen.SetActive(true);
     }
 
-    void rescue(VillagerBehavior villager) 
-    {
-        villager.hasBeenRescued = true;
-        villager.runForExtraction();
-    } 
-    void enableInteraction()
+    void rescue(VillagerBehavior villager) { villager.onBeingRescued(); } 
+    void enableInputs()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            float interactRange = 50f;
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray) 
                 if (collider.TryGetComponent(out VillagerBehavior villager)) 
@@ -67,9 +62,12 @@ public class Player : MonoBehaviour
                 }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (introScreen.activeInHierarchy)
         {
-            introScreen.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                introScreen.SetActive(false);
+            }
         }
     }
 }

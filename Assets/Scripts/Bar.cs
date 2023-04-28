@@ -3,16 +3,30 @@ using UnityEngine;
 public class Bar : MonoBehaviour 
 {    
     public RectTransform bar;
-    public Transform Water;
+    WaterBehavior water;
 
-    void Update () 
-        => updateBar();
+    void Awake()
+    {
+        bar = transform.GetChild(0).GetComponent<RectTransform>();
+        water = WaterBehavior.Instance;
+    } 
+
+    float getBarBottom()
+    {
+        return 0;
+    }
+
+    float getBarTop()
+    {
+        return 135.22f;
+    }
+
+    void Update () => updateBar();
 
     void updateBar()
     {
-        float WaterLevel = Water.position.y;
-        float BarLevel = mapRange(0f, 10f, -327f, 0, WaterLevel);
-        bar.offsetMax = new Vector2(bar.offsetMax.x, BarLevel);
+        float BarLevel = mapRange(water.initialLevel, water.maxLevel, getBarBottom(), getBarTop(), WaterBehavior.Instance.currentLevel);
+        bar.sizeDelta = new Vector2(bar.offsetMax.x, BarLevel);
     }
 
     public static float mapRange(float inStart, float inEnd, float outStart, float outEnd, float value)
