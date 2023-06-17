@@ -2,6 +2,9 @@
 
 ![Lost Island Logo](https://img.itch.zone/aW1nLzEyMDQ5ODQwLnBuZw==/315x250%23c/4Sq8dO.png)
 
+![image](https://github.com/PelleSwelle/Island-Rescue/assets/72729955/11757e1d-91fa-4970-9ed0-0b6a912dde09)
+
+
 Source files for The Lost Island by group 607, 2023 
 for Theory and Practice of Game design and -development at Medialogy at Aalborg University Copenhagen
 
