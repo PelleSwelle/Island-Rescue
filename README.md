@@ -1,13 +1,15 @@
 # The Lost Island
 
-![Lost Island Logo]([https://assets.digitalocean.com/articles/alligator/boo.svg](https://img.itch.zone/aW1nLzEyMDQ5ODQwLnBuZw==/315x250%23c/4Sq8dO.png))
+![Lost Island Logo](https://img.itch.zone/aW1nLzEyMDQ5ODQwLnBuZw==/315x250%23c/4Sq8dO.png)
 
 Source files for The Lost Island by group 607, 2023 
 for Theory and Practice of Game design and -development at Medialogy at Aalborg University Copenhagen
 
 The published game can be found on Itch.io https://pelleswelle.itch.io/the-lost-island
 
+
 ## Welcome to The Lost Island!
+![Alt text](https://img.itch.zone/aW1hZ2UvMjA0NzUzMi8xMjA0ODk2Ny5wbmc=/original/nGVMjL.png "a title")
 Once a tropical paradise in the middle nowhere, but due to climate changes and the melting ice caps the rising waters are eating away at the shore.  Save as many as you can, but also remember to save yourself.
 
 A rescue helicopter hangs over the farthest tip of the island, and it is your job to guide your fellow villagers to safety.
