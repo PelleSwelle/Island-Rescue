@@ -1,5 +1,7 @@
 # The Lost Island
 
+![Lost Island Logo]([https://assets.digitalocean.com/articles/alligator/boo.svg](https://img.itch.zone/aW1nLzEyMDQ5ODQwLnBuZw==/315x250%23c/4Sq8dO.png))
+
 Source files for The Lost Island by group 607, 2023 
 for Theory and Practice of Game design and -development at Medialogy at Aalborg University Copenhagen
 
