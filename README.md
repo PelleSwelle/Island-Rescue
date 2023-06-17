@@ -2,6 +2,7 @@
 
 Source files for The Lost Island by group 607, 2023 
 for Theory and Practice of Game design and -development at Medialogy at Aalborg University Copenhagen
+
 The published game can be found on Itch.io https://pelleswelle.itch.io/the-lost-island
 
 ## Welcome to The Lost Island!
